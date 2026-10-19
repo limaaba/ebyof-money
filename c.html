@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Carte de membre E.B.YO.F</title>
+  <style>
+    :root {
+      --fond: #eef2f8;
+      --texte: #1f2933;
+      --doux: #52606d;
+      --marine: #0b2e6f;
+      --bleu: #1565c0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --fond: #0d1420; --texte: #e4e7eb; --doux: #9aa5b1; }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--fond);
+      color: var(--texte);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+    }
+    .entete { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .entete img { width: 56px; height: 56px; border-radius: 50%; background: #fff; }
+    .entete strong { color: var(--bleu); font-size: 1.1rem; line-height: 1.2; }
+    .carte {
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 1.586;
+      border-radius: 20px;
+      padding: 22px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--marine), var(--bleu));
+      box-shadow: 0 12px 30px rgba(11, 46, 111, .35);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .etiquette { letter-spacing: .18em; font-size: .72rem; font-weight: 700; color: #90caf9; }
+    .id {
+      font-size: clamp(1.8rem, 9vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-variant-numeric: tabular-nums;
+    }
+    .pied { display: flex; justify-content: space-between; align-items: flex-end; font-size: .85rem; }
+    .pied b { font-size: 1rem; }
+    .texte { max-width: 380px; text-align: center; color: var(--doux); margin-top: 24px; }
+    footer { margin-top: auto; padding-top: 32px; font-size: .8rem; color: var(--doux); }
+  </style>
+</head>
+<body>
+  <div class="entete">
+    <img src="logo.jpg" alt="Logo E.B.YO.F">
+    <strong>E.B.YO.F SERVICES<br>INTERNATIONAL</strong>
+  </div>
+
+  <div class="carte">
+    <div class="etiquette">CARTE DE MEMBRE · ID CLIENT</div>
+    <div class="id" id="id">E.B.YO.F</div>
+    <div class="pied">
+      <span>Programme de fidélité<br><b>E.B.YO.F MONEY</b></span>
+      <span>1 point = 1 F</span>
+    </div>
+  </div>
+
+  <p class="texte" id="message">
+    Présentez cette carte au point de service E.B.YO.F à chaque opération
+    (recharges, dépôts et retraits Orange Money, 1XBET, Wave) pour cumuler
+    vos points de fidélité.
+  </p>
+
+  <footer>© 2026 E.B.YO.F SERVICES INTERNATIONAL</footer>
+
+  <script>
+    // Le QR du carnet contient « c?EBYOF-0001 » : seul l'ID est dans le
+    // lien, aucune autre donnée du client.
+    var brut = '';
+    try {
+      brut = decodeURIComponent(location.search.replace(/^\?(id=)?/, ''));
+    } catch (e) {}
+    if (/^EBYOF-\d{1,9}$/i.test(brut)) {
+      document.getElementById('id').textContent = brut.toUpperCase();
+      document.title = 'Carte de membre ' + brut.toUpperCase();
+    }
+  </script>
+</body>
+</html>
